@@ -8,7 +8,14 @@ app.on('ready',_=>{
 	const template = [{
 		label:name,
 		submenu:[{
-			label:`About ${name}`
+			label:`About ${name}`,
+			role:'about'
+		},{
+			type:'separator'
+		},{
+			label:'Quit',
+			click:_=>{app.quit()},
+				accelerator: 'CmdOrCtrl+q'
 		}]
 	}]
 	const menu = Menu.buildFromTemplate(template);
