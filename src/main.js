@@ -9,5 +9,6 @@ app.on('ready',_=>{
 		label:'a',
 		click: _=>console.log('test')
 	}])
-	tray.setContextMenu(contextMenu)
+	tray.setContextMenu(contextMenu);
+	tray.setToolTip('tip');
 })
