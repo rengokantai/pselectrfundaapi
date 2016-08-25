@@ -1,11 +1,16 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow
-const menu = electron.menubar
+const Menu = electron.Menu
 app.on('ready',_=>{
 	new BrowserWindow()
+	const name = electron.app.getName();
 	const template = [{
-		label:electron.app.getName()
+		label:name,
+		submenu:[{
+			label:`About ${name}`
+		}]
 	}]
-	Menu.buildFromTemplate(template)
+	const menu = Menu.buildFromTemplate(template);
+	Menu.setApplicationMenu(menu);
 })
