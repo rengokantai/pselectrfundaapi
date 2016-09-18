@@ -8,6 +8,18 @@ function addToStack(item,stack){
 	return [item].concat(stack.length>=STACK_SIZE?stack.slice(0,stack.length-1):stack)
 }
 
+function formatItem(item){
+	return item && item.length>10 ? item.substr(0,10)+'..':item
+}
+
+function formatMenuTemplateForStack(stack){
+	return stack.map((item,i)=>{
+		return{
+			label:`Copy:${formatItem(item)}`
+		}
+	})
+}
+
 function checkClipChange(clipboard,onChange){
 	let cache = clipboard.readText();
 	let latest
@@ -28,6 +40,6 @@ app.on('ready',_=>{
 	}]))
 	checkClipChange(clipboard,text=>{
 		stack = addToStack(text,stack)
-		console.log(stack);
+		tray.setContextMenu(Menu.buildFromTemplate(formatMenuTemplateForStack(stack)))
 	})
 })
